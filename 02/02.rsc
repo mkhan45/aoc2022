@@ -1,3 +1,9 @@
+let parsed_input = read_file("input.txt")
+|> to_charlist 
+|> split(_, "\n")
+|> filter(fn(ls) => ls != [], _)
+|> map(fn([opponent, _, self]) => (opponent, self), _)
+
 # math is painful
 let score1((opponent, self)) = {
     let result_score = match (opponent, self)
@@ -13,11 +19,7 @@ let score1((opponent, self)) = {
     result_score + move_score
 }
 
-read_file("input.txt")
-|> to_charlist 
-|> split(_, "\n")
-|> filter(fn(ls) => ls != [], _)
-|> map(fn([opponent, _, self]) => (opponent, self), _)
+let part1 = parsed_input
 |> map(score1, _)
 |> sum
 |> inspect
@@ -37,11 +39,7 @@ let score2((opponent, strategy)) = {
     score1((opponent, move))
 }
 
-read_file("input.txt")
-|> to_charlist 
-|> split(_, "\n")
-|> filter(fn(ls) => ls != [], _)
-|> map(fn([opponent, _, self]) => (opponent, self), _)
+let part2 = parsed_input
 |> map(score2, _)
 |> sum
 |> inspect
